@@ -1,5 +1,6 @@
-# Based on Ubuntu 21.10
-FROM ubuntu:21.10
+# Based on Ubuntu 20.04
+FROM ubuntu:20.04
+COPY sysctl.conf /etc/
 
 # Maintainer
 LABEL maintainer "Alexander Graf <alex@otherguy.io>"
