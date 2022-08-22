@@ -1,9 +1,8 @@
 # Based on Ubuntu 20.04
 FROM ubuntu:20.04
-COPY sysctl.conf /etc/
 
 # Maintainer
-LABEL maintainer "Alexander Graf <alex@otherguy.io>"
+LABEL maintainer "talung <talung@amler.com>"
 
 # Required to prevent warnings
 ARG DEBIAN_FRONTEND=noninteractive
@@ -18,6 +17,10 @@ EXPOSE 17500
 # Set language
 ENV LANG   "C.UTF-8"
 ENV LC_ALL "C.UTF-8"
+
+# Setup many file restriction
+RUN echo fs.inotify.max_user_watches=100000 | tee -a /etc/sysctl.conf
+RUN sysctl -p
 
 # Install prerequisites
 RUN apt-get update \
@@ -70,7 +73,7 @@ LABEL org.label-schema.name           "Dropbox"
 LABEL org.label-schema.version        "${VERSION}"
 LABEL org.label-schema.build-date     "${BUILD_DATE}"
 LABEL org.label-schema.description    "Standalone Dropbox client"
-LABEL org.label-schema.vcs-url        "https://github.com/otherguy/docker-dropbox"
+LABEL org.label-schema.vcs-url        "https://github.com/Talung/docker-dropbox"
 LABEL org.label-schema.vcs-ref        "${VCS_REF}"
 
 # Configurable sleep delay
